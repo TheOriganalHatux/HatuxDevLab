@@ -22,5 +22,13 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
     .WithStaticAssets();
+app.MapGet("/api/health", () =>
+{
+    return Results.Ok(new
+    {
+        status = "ok",
+        time = DateTime.UtcNow
+    });
+});
 
 app.Run();
