@@ -1,0 +1,26 @@
+﻿### Create project
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "name": "HatuxDevLab",
+  "description": "Main umbrella platform for my modules",
+  "priority": "High"
+}
+
+### Get all projects
+GET http://localhost:8080/api/projects
+
+### Get project by id
+GET http://localhost:8080/api/projects/1
+
+### Update project status
+PUT http://localhost:8080/api/projects/1/status
+Content-Type: application/json
+
+{
+  "status": "Active"
+}
+
+### Get project by id again
+GET http://localhost:8080/api/projects/1
