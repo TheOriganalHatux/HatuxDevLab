@@ -24,3 +24,13 @@ Content-Type: application/json
 
 ### Get project by id again
 GET http://localhost:8080/api/projects/1
+
+### Update project
+PUT http://localhost:8080/api/projects/1
+Content-Type: application/json
+
+{
+  "name": "Hatux DevLab Core",
+  "description": "Central platform for personal modules",
+  "priority": "Medium"
+}

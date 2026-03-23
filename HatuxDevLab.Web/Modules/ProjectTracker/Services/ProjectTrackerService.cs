@@ -71,4 +71,19 @@ public class ProjectTrackerService
             CreatedAtUtc = project.CreatedAtUtc
         };
     }
+    public ProjectResponse? UpdateProject(int id, UpdateProjectRequest request)
+    {
+        var project = _projects.FirstOrDefault(p => p.Id == id);
+
+        if (project is null)
+        {
+            return null;
+        }
+
+        project.Name = request.Name!.Trim();
+        project.Description = request.Description?.Trim();
+        project.Priority = request.Priority.Value;
+
+        return MapToResponse(project);
+    }
 }

@@ -120,6 +120,36 @@ app.MapPut("/api/projects/{id:int}/status", (int id, UpdateProjectStatusRequest 
 
     return Results.Ok(updatedProject);
 });
+app.MapPut("/api/projects/{id:int}", (int id, UpdateProjectRequest request, ProjectTrackerService service) =>
+{
+    if (string.IsNullOrWhiteSpace(request.Name))
+    {
+        return Results.BadRequest(new
+        {
+            error = "Project name is required"
+        });
+    }
+
+    if (request.Priority is null)
+    {
+        return Results.BadRequest(new
+        {
+            error = "Priority is required"
+        });
+    }
+
+    var updatedProject = service.UpdateProject(id, request);
+
+    if (updatedProject is null)
+    {
+        return Results.NotFound(new
+        {
+            error = $"Project with id {id} was not found"
+        });
+    }
+
+    return Results.Ok(updatedProject);
+});
 
 app.Run();
 
